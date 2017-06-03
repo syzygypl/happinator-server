@@ -3,7 +3,7 @@ Happiness Level Meter
 
 INSTALL
 -------
-`composer install && d:d:c && d:m:m -n`
+`composer install && bin/console d:d:c && bin/console d:m:m -n`
 
 
 VOTE
