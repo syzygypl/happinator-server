@@ -72,7 +72,7 @@ class HappinessLevelStatistics
         $expected = $total * 100;
 
         if ($expected === 0) {
-            return 100;
+            return 0;
         }
 
         $result['h'] = $levels[HappinessLevel::LEVEL_HAPPY] * 100;
