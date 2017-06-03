@@ -21,10 +21,8 @@ class HappinessLevelStatistics
         $this->repository = $repository;
     }
 
-    public function today(): array
+    public function getStatistics(Period $period)
     {
-
-        $period = $this->getTodayPeriod();
         $levels = $this->getByLevels($period);
         $total = $this->getTotal($levels);
         $score = $this->getHappinessLevel($levels, $total);
@@ -87,10 +85,24 @@ class HappinessLevelStatistics
 
     }
 
-    private function getTodayPeriod(): Period
+    /**
+     * @param \DateTime|null $from
+     * @param \DateTime|null $to
+     * @return Period
+     */
+    public function getPeriod(\DateTime $from = null, \DateTime $to = null): Period
     {
-        $from = (new \DateTime())->setTime(0, 0);
-        $to = (clone $from)->setTime(23, 59, 59);
+        if (!$from instanceof \DateTime && !$to instanceof \DateTime) {
+            $from = (new \DateTime())->setTime(0, 0, 0);
+            $to = (clone $from)->setTime(23, 59, 59);
+
+        } elseif (!$to instanceof \DateTime) {
+            $from = $from->setTime(0, 0, 0);
+            $to = (new \DateTime())->setTime(23, 59, 59);
+        } else {
+            $from = $from->setTime(0, 0, 0);
+            $to = $to->setTime(23, 59, 59);
+        }
 
         return new Period($from, $to);
     }
