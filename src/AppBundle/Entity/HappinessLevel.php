@@ -18,10 +18,6 @@ class HappinessLevel
     const LEVEL_NEUTRAL = 'neutral';
     const LEVEL_SAD = 'sad';
 
-    const LEVEL_HAPPY_WEIGHT = 100;
-    const LEVEL_NEUTRAL_WEIGHT = 50;
-    const LEVEL_SAD_WEIGHT = 1;
-
     /**
      * @var int The entity Id
      *

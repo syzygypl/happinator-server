@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\HappinessLevel;
 use AppBundle\Repository\HappinessLevelRepository;
 use AppBundle\ValueObject\Period;
 use Doctrine\ORM\EntityRepository;
@@ -26,12 +27,16 @@ class HappinessLevelStatistics
         $period = $this->getTodayPeriod();
         $levels = $this->getByLevels($period);
         $total = $this->getTotal($levels);
-        $avg = $this->getTodayAvg($levels, $total);
+        $score = $this->getHappinessLevel($levels, $total);
+        $percent = $this->getReadableHappinessLevel($score);
 
         return [
             'levels' => $levels,
             'total' => $total,
-            'avg' => $avg,
+            'happiness' => [
+                'score' => $score,
+                'percent' => $percent
+            ],
             'period' => [
                 'from' => $period->getFrom(),
                 'to' => $period->getTo(),
@@ -49,9 +54,36 @@ class HappinessLevelStatistics
         return array_sum(array_values($levels));
     }
 
-    private function getTodayAvg(array $levels, int $total): int
+    private function getReadableHappinessLevel($result): string
     {
-        return 0;
+        if ($result >= 75) {
+            return HappinessLevel::LEVEL_HAPPY;
+        }
+
+        if ($result >= 50) {
+            return HappinessLevel::LEVEL_NEUTRAL;
+        }
+
+        return HappinessLevel::LEVEL_SAD;
+    }
+
+    private function getHappinessLevel(array $levels, int $total): int
+    {
+
+        $result = [];
+        $expected = $total * 100;
+
+        if ($expected === 0) {
+            return 100;
+        }
+
+        $result['h'] = $levels[HappinessLevel::LEVEL_HAPPY] * 100;
+        $result['n'] = $levels[HappinessLevel::LEVEL_NEUTRAL] * 50;
+        $result['s'] = $levels[HappinessLevel::LEVEL_SAD] * 0;
+
+        $total = array_sum(array_values($result));
+
+        return $total / $expected * 100;
 
     }
 
