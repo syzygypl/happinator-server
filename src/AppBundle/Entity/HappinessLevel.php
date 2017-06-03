@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class HappinessLevel
 {
@@ -30,6 +31,7 @@ class HappinessLevel
      * @var string General happiness level
      *
      * @ORM\Column(type="string", length=10)
+     * @Assert\Choice(choices={"happy","neutral","sad"})
      * @Assert\NotBlank
      */
     private $level;
@@ -38,9 +40,8 @@ class HappinessLevel
      * @var \DateTime Date of vote
      *
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank
      */
-    private $date;
+    private $createdAt;
 
     /**
      * @return int
@@ -77,17 +78,17 @@ class HappinessLevel
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
+    public function getCreatedAt(): \DateTime
     {
-        return $this->date;
+        return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $date
+     * @ORM\PrePersist
      */
-    public function setDate(\DateTime $date)
+    public function setCreatedAt()
     {
-        $this->date = $date;
+        $this->createdAt = new \DateTime();
     }
 
     /**
