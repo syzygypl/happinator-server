@@ -11,7 +11,3 @@ monolog:
 doctrine:
     dbal:
         url: "%env(CLEARDB_DATABASE_URL)%"
-
-nelmio_cors:
-    defaults:
-        allow_origin:   ["%env(CROSS_ALLOW_ORIGIN)%"]
