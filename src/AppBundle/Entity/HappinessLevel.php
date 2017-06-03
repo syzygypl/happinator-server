@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="\AppBundle\Repository\HappinessLevelRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class HappinessLevel
@@ -17,6 +17,10 @@ class HappinessLevel
     const LEVEL_HAPPY = 'happy';
     const LEVEL_NEUTRAL = 'neutral';
     const LEVEL_SAD = 'sad';
+
+    const LEVEL_HAPPY_WEIGHT = 100;
+    const LEVEL_NEUTRAL_WEIGHT = 50;
+    const LEVEL_SAD_WEIGHT = 1;
 
     /**
      * @var int The entity Id
