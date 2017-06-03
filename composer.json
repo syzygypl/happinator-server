@@ -35,7 +35,8 @@
         "phpdocumentor/reflection-docblock": "^3.0",
         "nelmio/api-doc-bundle": "dev-master",
         "ext-intl": "^1.1",
-        "ext-mbstring": "^7.1"
+        "ext-mbstring": "^7.1",
+        "doctrine/doctrine-migrations-bundle": "^1.2"
     },
     "require-dev": {
         "api-platform/schema-generator": "^1.2",
