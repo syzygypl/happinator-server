@@ -31,10 +31,20 @@ class HappinessLevel
      * @var string General happiness level
      *
      * @ORM\Column(type="string", length=10)
-     * @Assert\Choice(choices={"happy","neutral","sad"})
+     * @Assert\Choice(
+     *     choices={"happy","neutral","sad"},
+     *     message="The level must match (happy|neutral|sad)"
+     * )
      * @Assert\NotBlank
      */
     private $level;
+
+    /**
+     * @var string Entrypoint identifier
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $entrypoint = '';
 
     /**
      * @var \DateTime Date of vote
@@ -89,6 +99,22 @@ class HappinessLevel
     public function setCreatedAt()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntrypoint(): string
+    {
+        return $this->entrypoint;
+    }
+
+    /**
+     * @param string $entrypoint
+     */
+    public function setEntrypoint(string $entrypoint)
+    {
+        $this->entrypoint = (string)$entrypoint;
     }
 
     /**
