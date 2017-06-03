@@ -20,7 +20,6 @@
     },
     "require": {
         "php": ">=7.0",
-        "ext-apcu": "*",
         "symfony/symfony": "3.*",
         "api-platform/core": "^2.0",
         "doctrine/orm": "^2.5",
