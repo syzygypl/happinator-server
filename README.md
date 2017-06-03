@@ -1,7 +1,12 @@
 Happiness Level Meter
 =====================
 
-Vote
+INSTALL
+-------
+composer install && d:d:c && d:m:m -n
+
+
+VOTE
 ----
 
 `POST /happiness_levels`
@@ -13,8 +18,8 @@ Vote
 }
 ```
 
-Get results
------------
+RESULTS
+-------
 Optional date format: `YYYY-MM-DD`
 
 `GET /happiness_levels/statistics`
