@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource
+ * * @ApiResource(collectionOperations={"post"={"method"="POST"}}, itemOperations={})
  * @ORM\Entity(repositoryClass="\AppBundle\Repository\HappinessLevelRepository")
  * @ORM\HasLifecycleCallbacks
  */
