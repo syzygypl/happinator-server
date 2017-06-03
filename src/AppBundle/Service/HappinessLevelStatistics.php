@@ -28,14 +28,14 @@ class HappinessLevelStatistics
         $levels = $this->getByLevels($period);
         $total = $this->getTotal($levels);
         $score = $this->getHappinessLevel($levels, $total);
-        $percent = $this->getReadableHappinessLevel($score);
+        $level = $this->getReadableHappinessLevel($score);
 
         return [
             'levels' => $levels,
             'total' => $total,
             'happiness' => [
                 'score' => $score,
-                'percent' => $percent
+                'level' => $level
             ],
             'period' => [
                 'from' => $period->getFrom(),
